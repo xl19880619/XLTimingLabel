@@ -1,0 +1,14 @@
+PODS:
+  - XLTimingLabel (0.0.1)
+
+DEPENDENCIES:
+  - XLTimingLabel (from `../`)
+
+EXTERNAL SOURCES:
+  XLTimingLabel:
+    :path: ../
+
+SPEC CHECKSUMS:
+  XLTimingLabel: bcc88dc8535bcb8da0d072956017d1e8f38f77dd
+
+COCOAPODS: 0.39.0

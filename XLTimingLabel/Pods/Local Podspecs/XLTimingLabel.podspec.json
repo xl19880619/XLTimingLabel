@@ -1,0 +1,23 @@
+{
+  "name": "XLTimingLabel",
+  "version": "0.0.1",
+  "summary": "Increase or Decrease time label with formatter style.",
+  "homepage": "https://github.com/xl19880619/XLTimingLabel",
+  "authors": {
+    "Xie Lei": "xl19880619@gmail.com"
+  },
+  "platforms": {
+    "ios": "6.0"
+  },
+  "requires_arc": true,
+  "license": "MIT",
+  "social_media_url": "http://xlconan.tech/blog",
+  "source": {
+    "git": "https://github.com/xl19880619/XLTimingLabel.git",
+    "tag": "0.0.1"
+  },
+  "source_files": [
+    "TimingLabel/XLTimingLabel.h",
+    "TimingLabel/XLTimingLabel.m"
+  ]
+}
