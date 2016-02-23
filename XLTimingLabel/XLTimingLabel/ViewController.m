@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <XLTimingLabel/XLTimingLabel.h>
+#import "XLTimingTableViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet XLTimingLabel *first;
@@ -28,34 +29,40 @@
     self.first.dateFormatterStyle = XLDateFormatterStyleDefault;
     [self.first startWithDate:[NSDate dateWithTimeInterval:200 sinceDate:now]];
     
-    self.second.timingStyle = XLTimingStyleCountdown;
-    self.second.dateFormatterStyle = XLDateFormatterStyleHHmmss;
-    [self.second startWithDate:[NSDate dateWithTimeInterval:200 sinceDate:now]];
-    
-    __weak __typeof(&*self)weakSelf = self;
-    self.third.timingStyle = XLTimingStyleCountdown;
-    self.third.dateFormatterStyle = XLDateFormatterStyleCustom;
-    [self.third setCustomDisplayTimeStringBlock:^NSString *(NSTimeInterval timeInerval) {
-        return [weakSelf customDisplayTimeString:timeInerval];
-    }];
-    [self.third startWithDate:[NSDate dateWithTimeInterval:200 sinceDate:now]];
-    
-    self.fourth.timingStyle = XLTimingStyleIncrease;
-    self.fourth.dateFormatterStyle = XLDateFormatterStylemmss;
-    [self.fourth startWithDate:now];
-    
-    self.fifth.textAlignment = NSTextAlignmentLeft;
-    self.fifth.timingStyle = XLTimingStyleIncrease;
-    self.fifth.dateFormatterStyle = XLDateFormatterStyleCustom;
-    [self.fifth setCustomDisplayTimeStringBlock:^NSString *(NSTimeInterval timeInerval) {
-        return [weakSelf customDisplayTimeString:timeInerval];
-    }];
-    [self.fifth startWithDate:[NSDate dateWithTimeInterval:-10000 sinceDate:now]];
+//    self.second.timingStyle = XLTimingStyleCountdown;
+//    self.second.dateFormatterStyle = XLDateFormatterStyleHHmmss;
+//    [self.second startWithDate:[NSDate dateWithTimeInterval:200 sinceDate:now]];
+//    
+//    __weak __typeof(&*self)weakSelf = self;
+//    self.third.timingStyle = XLTimingStyleCountdown;
+//    self.third.dateFormatterStyle = XLDateFormatterStyleCustom;
+//    [self.third setCustomDisplayTimeStringBlock:^NSString *(NSTimeInterval timeInerval) {
+//        return [weakSelf customDisplayTimeString:timeInerval];
+//    }];
+//    [self.third startWithDate:[NSDate dateWithTimeInterval:200 sinceDate:now]];
+//    
+//    self.fourth.timingStyle = XLTimingStyleIncrease;
+//    self.fourth.dateFormatterStyle = XLDateFormatterStylemmss;
+//    [self.fourth startWithDate:now];
+//    
+//    self.fifth.textAlignment = NSTextAlignmentLeft;
+//    self.fifth.timingStyle = XLTimingStyleIncrease;
+//    self.fifth.dateFormatterStyle = XLDateFormatterStyleCustom;
+//    [self.fifth setCustomDisplayTimeStringBlock:^NSString *(NSTimeInterval timeInerval) {
+//        return [weakSelf customDisplayTimeString:timeInerval];
+//    }];
+//    [self.fifth startWithDate:[NSDate dateWithTimeInterval:-10000 sinceDate:now]];
 }
 
 - (NSString *)customDisplayTimeString:(NSTimeInterval )timeInterval{
     
     return [NSString stringWithFormat:@"%d:%d",(int)timeInterval/60,(int)timeInterval%60];
+}
+
+- (IBAction)testListView:(id)sender {
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[XLTimingTableViewController alloc] initWithStyle:UITableViewStyleGrouped]];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

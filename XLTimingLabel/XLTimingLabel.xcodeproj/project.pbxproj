@@ -14,6 +14,10 @@
 		D306FE741C7191EB00771153 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D306FE721C7191EB00771153 /* Main.storyboard */; };
 		D306FE761C7191EB00771153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D306FE751C7191EB00771153 /* Assets.xcassets */; };
 		D306FE791C7191EB00771153 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D306FE771C7191EB00771153 /* LaunchScreen.storyboard */; };
+		D3487B0B1C7C5ACE0028ACD1 /* XLTimingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3487B0A1C7C5ACE0028ACD1 /* XLTimingTableViewController.m */; };
+		D3487B0F1C7C5ADC0028ACD1 /* XLTimingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3487B0D1C7C5ADC0028ACD1 /* XLTimingTableViewCell.m */; };
+		D3487B101C7C5ADC0028ACD1 /* XLTimingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3487B0E1C7C5ADC0028ACD1 /* XLTimingTableViewCell.xib */; };
+		D3487B131C7C5AEC0028ACD1 /* XLTimingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3487B121C7C5AEC0028ACD1 /* XLTimingModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,13 @@
 		D306FE751C7191EB00771153 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D306FE781C7191EB00771153 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D306FE7A1C7191EB00771153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3487B091C7C5ACE0028ACD1 /* XLTimingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTimingTableViewController.h; sourceTree = "<group>"; };
+		D3487B0A1C7C5ACE0028ACD1 /* XLTimingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTimingTableViewController.m; sourceTree = "<group>"; };
+		D3487B0C1C7C5ADC0028ACD1 /* XLTimingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTimingTableViewCell.h; sourceTree = "<group>"; };
+		D3487B0D1C7C5ADC0028ACD1 /* XLTimingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTimingTableViewCell.m; sourceTree = "<group>"; };
+		D3487B0E1C7C5ADC0028ACD1 /* XLTimingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XLTimingTableViewCell.xib; sourceTree = "<group>"; };
+		D3487B111C7C5AEC0028ACD1 /* XLTimingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTimingModel.h; sourceTree = "<group>"; };
+		D3487B121C7C5AEC0028ACD1 /* XLTimingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTimingModel.m; sourceTree = "<group>"; };
 		EACF8F045B42CDC2D2F0D045 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +97,13 @@
 				D306FE6D1C7191EB00771153 /* AppDelegate.m */,
 				D306FE6F1C7191EB00771153 /* ViewController.h */,
 				D306FE701C7191EB00771153 /* ViewController.m */,
+				D3487B111C7C5AEC0028ACD1 /* XLTimingModel.h */,
+				D3487B121C7C5AEC0028ACD1 /* XLTimingModel.m */,
+				D3487B091C7C5ACE0028ACD1 /* XLTimingTableViewController.h */,
+				D3487B0A1C7C5ACE0028ACD1 /* XLTimingTableViewController.m */,
+				D3487B0C1C7C5ADC0028ACD1 /* XLTimingTableViewCell.h */,
+				D3487B0D1C7C5ADC0028ACD1 /* XLTimingTableViewCell.m */,
+				D3487B0E1C7C5ADC0028ACD1 /* XLTimingTableViewCell.xib */,
 				D306FE721C7191EB00771153 /* Main.storyboard */,
 				D306FE751C7191EB00771153 /* Assets.xcassets */,
 				D306FE771C7191EB00771153 /* LaunchScreen.storyboard */,
@@ -164,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D306FE791C7191EB00771153 /* LaunchScreen.storyboard in Resources */,
+				D3487B101C7C5ADC0028ACD1 /* XLTimingTableViewCell.xib in Resources */,
 				D306FE761C7191EB00771153 /* Assets.xcassets in Resources */,
 				D306FE741C7191EB00771153 /* Main.storyboard in Resources */,
 			);
@@ -225,8 +244,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D306FE711C7191EB00771153 /* ViewController.m in Sources */,
+				D3487B131C7C5AEC0028ACD1 /* XLTimingModel.m in Sources */,
 				D306FE6E1C7191EB00771153 /* AppDelegate.m in Sources */,
 				D306FE6B1C7191EB00771153 /* main.m in Sources */,
+				D3487B0F1C7C5ADC0028ACD1 /* XLTimingTableViewCell.m in Sources */,
+				D3487B0B1C7C5ACE0028ACD1 /* XLTimingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

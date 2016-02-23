@@ -11,6 +11,8 @@
 @interface XLTimingLabel ()
 @property (assign, nonatomic) NSTimeInterval remainingTime;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) CADisplayLink *displayLink;
+@property (nonatomic) int currentTimeInterval;
 
 /**
  *  timingStyle == XLTimingStyleIncrease 调用
@@ -31,8 +33,9 @@
 
 - (void)dealloc{
     
-    if (_timer) {
-        [_timer invalidate];
+    if (_displayLink) {
+        [_displayLink invalidate];
+        _displayLink = nil;
     }
 }
 
@@ -83,65 +86,68 @@
 }
 
 - (void)startIncreaseWithTimeInterval:(NSTimeInterval)timeInterval{
-    [self.timer invalidate];
+    [self.displayLink invalidate];
     self.remainingTime = timeInterval;
     self.text = @(timeInterval).stringValue;
-    NSTimer *timer = [NSTimer timerWithTimeInterval:1.0f
-                                             target:self
-                                           selector:@selector(increase)
-                                           userInfo:nil
-                                            repeats:YES];
-    
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    self.timer = timer;
-    [self.timer fire];
+    self.currentTimeInterval = CACurrentMediaTime()-1;
+    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(increase)];
+    [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 
 - (void)increase{
-    NSString *timeString = [self displayTimeForTimeInterval:self.remainingTime];
-    if (self.prefixString) {
-        self.text = [self.prefixString stringByAppendingString:timeString];
-    }else{
-        self.text = timeString;
+    
+    if (CACurrentMediaTime()-self.currentTimeInterval > 1.0) {
+        self.currentTimeInterval = CACurrentMediaTime();
+        NSString *timeString = [self displayTimeForTimeInterval:self.remainingTime];
+        if (self.prefixString) {
+            self.text = [self.prefixString stringByAppendingString:timeString];
+        }else{
+            self.text = timeString;
+        }
+        self.remainingTime++;
     }
-    self.remainingTime++;
 }
 
 - (void)startCountDownWithTotalTime:(NSTimeInterval)totalTime{
-    [self.timer invalidate];
+    
+    [self.displayLink invalidate];
     self.remainingTime = totalTime;
-    self.text = @(totalTime).stringValue;
-    
-    NSTimer *timer = [NSTimer timerWithTimeInterval:1.0f
-                                             target:self
-                                           selector:@selector(countDown)
-                                           userInfo:nil
-                                            repeats:YES];
-    
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    self.timer = timer;
-    [self.timer fire];
+    if (totalTime <= 0) {
+        [self stop];
+    }else{
+        self.text = @(totalTime).stringValue;
+        
+        self.currentTimeInterval = CACurrentMediaTime()-1;
+//        [self.timer invalidate];
+//        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+//        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(countDown)];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    }
 }
 
 - (void)countDown{
     //如果要改成倒计时位数变短的需求，在这里重新设置一下style就可以了
-    NSString *timeString = [self displayTimeForTimeInterval:self.remainingTime];
-    if (self.prefixString) {
-        self.text = [self.prefixString stringByAppendingString:timeString];
-    }else{
-        self.text = timeString;
+//    NSLog(@"%f",CACurrentMediaTime());
+    if (CACurrentMediaTime()-self.currentTimeInterval > 1.0) {
+        self.currentTimeInterval = CACurrentMediaTime();
+        NSString *timeString = [self displayTimeForTimeInterval:self.remainingTime];
+        if (self.prefixString) {
+            self.text = [self.prefixString stringByAppendingString:timeString];
+        }else{
+            self.text = timeString;
+        }
+        self.remainingTime--;
+        if (self.remainingTime<=0) {
+            self.remainingTime = 0;
+            [self stop];
+        }
     }
-    self.remainingTime--;
-    if (self.remainingTime<=0) {
-        self.remainingTime = 0;
-        [self stop];
-    }
-    
 }
 
 - (void)stop{
-    [self.timer invalidate];
-    self.timer = nil;
+    [self.displayLink invalidate];
+    self.displayLink = nil;
     if (self.completionBlock) {
         self.completionBlock(self.remainingTime);
     }
@@ -158,7 +164,7 @@
     formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     switch (self.dateFormatterStyle) {
         case XLDateFormatterStyleDefault: {
-            [formatter setDateFormat:@"mm分ss秒"];
+            [formatter setDateFormat:@"HH时mm分ss秒"];
             break;
         }
         case XLDateFormatterStyleHHmmss: {
